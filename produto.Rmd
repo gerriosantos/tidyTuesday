@@ -52,7 +52,7 @@ library(tidyverse)
 
 ```{r}
 
-dados <- readr::read_rds('../data/vacinas.rds') |> 
+dados <- readr::read_rds('data/vacinas.rds') |> 
   dplyr::filter(data_aplicacao >= '2021-01-17') 
 
 ```
