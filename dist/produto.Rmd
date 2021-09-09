@@ -36,7 +36,7 @@ style_xaringan(
 
   header_font_google = google_font("Josefin Sans"),
   text_font_google   = google_font("Montserrat", "300", "300i"),
-  code_font_google   = google_font("Fira Mono"),
+  code_font_google   = google_font("Fira Code"),
   inverse_background_color = 'white',
   inverse_text_color = "#7B241C",
   inverse_text_shadow = TRUE,
