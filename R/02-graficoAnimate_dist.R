@@ -6,6 +6,10 @@ library(ggimage)
 
 #' Gráfico em gif -- será usado somente a imagem gif salva na pasta
 #' dist, pois, o gganimate é bem demorado.
+#'
+
+dados <- readr::read_rds('data/vacinas.rds') |>
+  dplyr::filter(data_aplicacao >= '2021-01-17')
 
 gr1 <- dados |> group_by(data_aplicacao, regiao) |>
   summarise(across(paciente:pop, ~ sum(.x)), .groups = 'drop') |>
@@ -38,9 +42,9 @@ gr1 <- dados |> group_by(data_aplicacao, regiao) |>
   transition_reveal(data_aplicacao)+
   coord_cartesian(clip = 'off')
 
-# Salvando em gif
+      # Salvando em gif
 
-anim_save(animation = gr1, filename = 'dist/gr1.gif')
+#anim_save(animation = gr1, filename = 'dist/gr1.gif')
 
 
 
