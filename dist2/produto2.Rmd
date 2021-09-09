@@ -1,0 +1,113 @@
+---
+title: "Vacinação das Regiões Brasileiras"
+subtitle: "#tidytuesday"
+author: "Gerrio Barbosa"
+#institute: "Curso-r"
+date: "`r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    css: [xaringan-themer.css]
+    #seal: false
+    #lib_dir: libs
+    nature:
+      #highlightStyle: github
+      #highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+
+library(xaringanthemer)
+
+style_xaringan(
+  text_color = '#7B241C',
+  header_color = 'black',
+  background_image = 'cabecario.png',
+  #header_background_color = 'blue',
+  text_slide_number_font_size = NULL,
+  #padding = '1em', '4em', '1em', '4em',
+  #title_slide_background_color = color_principal,
+
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Montserrat", "300", "300i"),
+  code_font_google   = google_font("Fira Mono"),
+  inverse_background_color = 'white',
+  inverse_text_color = "#7B241C",
+  inverse_text_shadow = TRUE,
+  title_slide_background_position = 'top'
+)
+
+```
+
+```{r}
+library(tidyverse)
+library(gganimate)
+library(gifski)
+library(ggimage)
+
+```
+
+```{r}
+
+dados <- readr::read_rds('../data/vacinas.rds') |> 
+  dplyr::filter(data_aplicacao >= '2021-01-17') 
+
+```
+background-image: url(coroninha_.gif)
+background-size: cover
+
+---
+
+background-image: url(todos_.png)
+background-size: cover
+
+# `r .x`
+
+
+```{r, echo=FALSE, out.width = '60%', out.height='50%', fig.align='center'}
+
+dados |> 
+  filter(regiao == .x) |> 
+  ggplot(aes(x = data_aplicacao,
+             y = paciente, group = uf, color = uf)) +
+  geom_line()+
+  theme_minimal()+
+  scale_y_continuous(n.breaks = 12)+
+  scale_x_date(date_breaks = '1 month',
+               labels = \(x) stringr::str_to_title(format( x, '%b')))+
+  theme(text = element_text(family="Times New Roman", color="black",
+                            size=12, face="bold"),
+        legend.position = 'bottom',
+        panel.grid = element_line(colour = 'lightgray'),
+        #plot.background = element_rect(fill = "#111111")
+  )+
+  labs(title = 'Vacinação nas Regiões do Brasil',
+       subtitle = 'Quantidade Total de Pacientes Vacinados',
+       x = '', y = '',
+       caption = '',
+       tag = '', color = '')
+
+
+```
+
+---
+
+background-image: url(chorao_.gif)
+background-size: cover
+
+
+```{r, echo=FALSE, out.width = '40%', out.height='70%', fig.align='right'}
+
+knitr::include_graphics(path = 'giphy.gif')
+
+```
+
+
+
+
